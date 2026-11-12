@@ -19,7 +19,8 @@ Site pessoal. Prazo do pacote: 20/12/2026.
 - **Cases profundos:**
   1. Mangut: física custom, solver do gancho testado, speedrun/Steam, Build & Ship.
   2. Dominoes Battle (Gazeus): números de loja em destaque na mesa (10M+ downloads do Jogatina no Google Play, 380K+ avaliações, 4.7★ App Store).
-  3. Rabiola (Okoto Studio, criação de Leonardo Souza): Alberto dev do cliente Unity do telão e do relay WebSocket. 2º lugar Pitch Black 2022 (Black Public Media).
+  3. Rabiola Tales (VR 6DoF, Quest/Rift, BPM + Vild Studio, criação de Leonardo Souza): Alberto fez a física da pipa e a interação em VR. Rede NewImages 2021.
+  4. Rabiola Céu Aberto / Open Skies (Okoto Studio, spin-off do Tales): Alberto dev do cliente Unity da projeção, do relay WebSocket e da infra. 2º lugar Pitch Black 2022 (US$ 25 mil).
 - **Índice:** Tech Lead na 762interactive (sem projeto), Dominoes Jogatina, Project Genesis (YDreams).
 - **Números:** só de fonte pública conferida ou dados pelo Alberto. Nada de agregador de terceiros.
 - **Fora:** projetos políticos (Tanto Faz, Cavaro Negro, Amor por SP, MF26) e qualquer repo de código público.
