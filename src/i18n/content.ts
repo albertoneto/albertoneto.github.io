@@ -12,7 +12,7 @@ export type Case = {
   sections: { h: string; p?: string; list?: string[] }[];
   results: { value: string; label: string }[];
   highlight?: { value: string; label: string }[];
-  media: 'mangut' | 'rabiola' | 'tales' | 'dominoes';
+  media: 'mangut' | 'rabiola' | 'dominoes';
   link?: { href: string; label: string };
 };
 
@@ -109,68 +109,41 @@ const en = {
       link: { href: 'https://apps.apple.com/app/id1521913067', label: 'App Store' },
     },
     {
-      id: 'rabiola-tales',
-      title: 'Rabiola Tales',
-      org: 'Black Public Media · Vild Studio',
+      id: 'rabiola',
+      title: 'Rabiola',
+      org: 'Leonardo Souza · Okoto Studio · Black Public Media',
       inspector: [
-        { k: 'Role', v: 'Developer · kite physics and VR interaction' },
+        { k: 'Role', v: 'Developer · VR kite physics, projection client, server and infra' },
         { k: 'Engine', v: 'Unity · C#' },
-        { k: 'Platforms', v: 'Meta Quest · Rift · Rift S' },
-        { k: 'Format', v: '6DoF VR · ~20 min · seated or standing' },
+        { k: 'Network', v: 'Node.js · WebSocket · Heroku' },
+        { k: 'Platforms', v: 'Meta Quest · Rift · projection + phones' },
       ],
       pitch:
-        'A kite-shop owner teaches you to fly a kite over the rooftops of a Rio favela, while telling stories about the neighborhood.',
+        'Two ways to fly a kite over Rio: in VR, from a favela rooftop, and on the street, in a sky projected on a building with your phone as the controller.',
       sections: [
         {
-          h: 'Problem',
-          p: 'Everyone in Rio grew up flying kites, so everyone knows the second one feels wrong. In VR there is no screen between you and the kite: if the line, the wind or the dive is off, the whole experience is off.',
-        },
-        {
-          h: 'What I built',
+          h: 'Rabiola Tales · VR',
+          p: 'A kite-shop owner teaches you to fly over the rooftops of a Rio favela while telling stories about the neighborhood. Everyone in Rio grew up flying kites, so everyone knows the second one feels wrong.',
           list: [
             'The kite flight model: custom physics for wind, lift, drag and line tension, tuned until it behaves like a real rooftop kite.',
-            'Line control with tracked hands: pull and give slack to climb, dive and steer, the way you learn it on a rooftop.',
+            'Line control with tracked hands: pull and give slack to climb, dive and steer.',
           ],
         },
-      ],
-      results: [
-        { value: '6DoF', label: 'Meta Quest and Rift' },
-        { value: '~20 min', label: 'narrative VR experience' },
-        { value: '2021', label: 'NewImages festival network, Paris' },
-      ],
-      media: 'tales',
-    },
-    {
-      id: 'rabiola',
-      title: 'Rabiola Céu Aberto',
-      org: 'Okoto Studio',
-      inspector: [
-        { k: 'Role', v: 'Developer · projection client, server and infra' },
-        { k: 'Stack', v: 'Unity 6 · Node.js · WebSocket' },
-        { k: 'Hosting', v: 'Heroku' },
-        { k: 'Format', v: 'Location-based · projection mapped' },
-      ],
-      pitch:
-        'The street spin-off of Rabiola Tales: a sky projected on a building, and anyone walking by flies a kite in it from their own phone.',
-      sections: [
         {
-          h: 'Problem',
-          p: 'A live installation has no second take. Strangers join and leave at random, phones go idle and lose signal, and if anything drops a crowd is staring at a frozen wall.',
-        },
-        {
-          h: 'What I built',
+          h: 'Rabiola Céu Aberto · projection',
+          p: 'The street spin-off: anyone walking by opens a page, gets a kite and flies it with up to 25 strangers. A live show has no second take, so the system had to survive idle phones, lost signal and people leaving mid-match.',
           list: [
-            'Three pieces, one socket: the Unity client that drives the projection, a Node.js WebSocket relay, and a web controller, so the phone needs nothing installed.',
-            'A tiny protocol: each phone gets a letter that is its kite. Swipes go up as commands, catches come back as a personal score.',
-            'Live-event hardening: protocol-level heartbeat under the host 55 s idle cutoff, any message counts as a sign of life, kite resume after a dropped connection (no ghost kites) and a clean reset between matches.',
-            'Built for showtime: one always-on process with state in memory on purpose, and keyboard controls for match length, field of view and HUD placement to fit any wall.',
+            'Three pieces, one socket: Unity projection client, Node.js WebSocket relay and a web controller. Nothing to install.',
+            'Each phone gets a letter that is its kite. Swipes go up as commands, catches come back as a personal score.',
+            'Live-event hardening: protocol-level heartbeat under the host 55 s idle cutoff, kite resume after a drop (no ghost kites), clean reset between matches.',
           ],
         },
       ],
       results: [
         { value: '26', label: 'players flying at once' },
-        { value: '0', label: 'apps to install: the browser is the gamepad' },
-        { value: 'US$25K', label: '2nd place, Pitch Black 2022 (Black Public Media)' },
+        { value: '0', label: 'apps to install' },
+        { value: 'US$25K', label: '2nd place, Pitch Black 2022' },
+        { value: '6DoF', label: 'VR on Quest and Rift' },
       ],
       media: 'rabiola',
       link: { href: 'https://rabiolaopen.com', label: 'Project site' },
@@ -287,68 +260,41 @@ const pt: typeof en = {
       link: { href: 'https://apps.apple.com/app/id1521913067', label: 'App Store' },
     },
     {
-      id: 'rabiola-tales',
-      title: 'Rabiola Tales',
-      org: 'Black Public Media · Vild Studio',
+      id: 'rabiola',
+      title: 'Rabiola',
+      org: 'Leonardo Souza · Okoto Studio · Black Public Media',
       inspector: [
-        { k: 'Papel', v: 'Dev · física da pipa e interação em VR' },
+        { k: 'Papel', v: 'Dev · física da pipa em VR, cliente da projeção, servidor e infra' },
         { k: 'Engine', v: 'Unity · C#' },
-        { k: 'Plataformas', v: 'Meta Quest · Rift · Rift S' },
-        { k: 'Formato', v: 'VR 6DoF · ~20 min · sentado ou em pé' },
+        { k: 'Rede', v: 'Node.js · WebSocket · Heroku' },
+        { k: 'Plataformas', v: 'Meta Quest · Rift · projeção + celulares' },
       ],
       pitch:
-        'O dono de uma loja de pipa te ensina a empinar sobre as lajes de uma favela do Rio enquanto conta histórias do bairro.',
+        'Dois jeitos de empinar pipa no Rio: em VR, de cima de uma laje na favela, e na rua, num céu projetado num prédio com o celular de controle.',
       sections: [
         {
-          h: 'Problema',
-          p: 'Todo mundo no Rio cresceu soltando pipa, então todo mundo sabe na hora quando uma está errada. Em VR não tem tela entre você e a pipa: se a linha, o vento ou o dibico estiver errado, a experiência inteira desanda.',
-        },
-        {
-          h: 'O que eu construí',
+          h: 'Rabiola Tales · VR',
+          p: 'O dono de uma loja de pipa te ensina a empinar sobre as lajes de uma favela do Rio enquanto conta histórias do bairro. Todo mundo no Rio cresceu soltando pipa, então todo mundo sabe na hora quando uma está errada.',
           list: [
             'O modelo de voo da pipa: física custom de vento, sustentação, arrasto e tensão da linha, ajustada até se comportar como pipa de laje de verdade.',
-            'Controle da linha com as mãos rastreadas: puxa e dá linha pra subir, dibicar e manobrar, do jeito que se aprende na laje.',
+            'Controle da linha com as mãos rastreadas: puxa e dá linha pra subir, dibicar e manobrar.',
           ],
         },
-      ],
-      results: [
-        { value: '6DoF', label: 'Meta Quest e Rift' },
-        { value: '~20 min', label: 'experiência narrativa em VR' },
-        { value: '2021', label: 'rede do festival NewImages, Paris' },
-      ],
-      media: 'tales',
-    },
-    {
-      id: 'rabiola',
-      title: 'Rabiola Céu Aberto',
-      org: 'Okoto Studio',
-      inspector: [
-        { k: 'Papel', v: 'Dev · cliente da projeção, servidor e infra' },
-        { k: 'Stack', v: 'Unity 6 · Node.js · WebSocket' },
-        { k: 'Hospedagem', v: 'Heroku' },
-        { k: 'Formato', v: 'Instalação · projeção mapeada' },
-      ],
-      pitch:
-        'O spin-off do Rabiola Tales pra rua: um céu projetado num prédio, e qualquer um que passa empina pipa nele pelo próprio celular.',
-      sections: [
         {
-          h: 'Problema',
-          p: 'Instalação ao vivo não tem segunda chance. Desconhecidos entram e saem a qualquer hora, celular fica ocioso e perde sinal, e se algo cai tem gente olhando pra uma parede congelada.',
-        },
-        {
-          h: 'O que eu construí',
+          h: 'Rabiola Céu Aberto · projeção',
+          p: 'O spin-off pra rua: quem passa abre uma página, ganha uma pipa e empina com até 25 desconhecidos. Show ao vivo não tem segunda chance, então o sistema tinha que aguentar celular ocioso, sinal caindo e gente saindo no meio da partida.',
           list: [
-            'Três peças, um socket: o cliente Unity que roda a projeção, um relay WebSocket em Node.js e um controle web, pro celular não precisar instalar nada.',
-            'Um protocolo mínimo: cada celular ganha uma letra, que é a pipa dele. Swipe sobe como comando, pipa coletada volta como placar pessoal.',
-            'Blindagem de evento ao vivo: heartbeat no protocolo abaixo do corte de 55 s do host, qualquer mensagem conta como sinal de vida, retomada da pipa depois de queda (sem pipa fantasma) e reset limpo entre partidas.',
-            'Feito pra hora do show: um processo sempre ligado, com estado em memória de propósito, e atalhos pra duração da partida, campo de visão e posição do HUD, pra caber em qualquer parede.',
+            'Três peças, um socket: cliente Unity da projeção, relay WebSocket em Node.js e controle web. Nada pra instalar.',
+            'Cada celular ganha uma letra, que é a pipa dele. Swipe sobe como comando, pipa coletada volta como placar pessoal.',
+            'Blindagem de evento ao vivo: heartbeat no protocolo abaixo do corte de 55 s do host, retomada da pipa depois de queda (sem pipa fantasma), reset limpo entre partidas.',
           ],
         },
       ],
       results: [
         { value: '26', label: 'jogadores ao mesmo tempo' },
-        { value: '0', label: 'apps pra instalar: o navegador é o controle' },
-        { value: 'US$25 mil', label: '2º lugar, Pitch Black 2022 (Black Public Media)' },
+        { value: '0', label: 'apps pra instalar' },
+        { value: 'US$25 mil', label: '2º lugar, Pitch Black 2022' },
+        { value: '6DoF', label: 'VR no Quest e no Rift' },
       ],
       media: 'rabiola',
       link: { href: 'https://rabiolaopen.com', label: 'Site do projeto' },
