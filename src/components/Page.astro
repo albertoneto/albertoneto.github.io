@@ -233,8 +233,8 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 0; display: grid; grid-template-columns: 1fr; gap: 24px; }
       .role { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin: 0 0 18px; }
       h1 { margin: 0; font-weight: 800; font-size: clamp(64px, 13vw, 184px); line-height: .84; letter-spacing: -.045em; font-variation-settings: 'opsz' 96; }
-      h1 > span { display: block; }
-      h1 .last { font-weight: 300; font-style: normal; letter-spacing: -.05em; padding-left: .55em; }
+      h1 > span { display: block; white-space: nowrap; }
+      h1 .last { font-weight: 300; font-style: normal; letter-spacing: -.05em; padding-left: .4em; }
       .lead { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; font-weight: 600; letter-spacing: -.01em; max-width: 24ch; margin: 36px 0 12px; }
       .sub { color: var(--ink-2); max-width: 46ch; margin: 0; }
       .hero-sim { position: relative; height: clamp(320px, 46vw, 520px); border: 1px solid var(--rule); background: rgba(239,235,226,.6); }
@@ -244,7 +244,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .creds dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; font-weight: 600; font-size: clamp(16px, 1.6vw, 20px); letter-spacing: -.01em; }
       @media (min-width: 960px) {
         .hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); column-gap: 40px; align-items: stretch; }
-        h1 { font-size: clamp(64px, 8.6vw, 150px); }
+        h1 { font-size: clamp(64px, 7.4vw, 128px); }
         .hero-copy { align-self: end; }
         .hero-sim { height: 100%; min-height: 520px; }
       }

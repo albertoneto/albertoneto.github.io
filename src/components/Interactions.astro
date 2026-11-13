@@ -1,21 +1,4 @@
-<div class="cursor" aria-hidden="true"><span></span></div>
-
 <style is:global>
-  /* Cursor com squash & stretch: estica na direção do movimento, vira anel sobre o que é clicável.
-     Só em mouse; em toque e com movimento reduzido nada disso existe. */
-  .cursor { display: none; }
-  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    html.has-cursor, html.has-cursor a, html.has-cursor button { cursor: none; }
-    html.has-cursor #rope { cursor: none; }
-    .cursor { display: block; position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; mix-blend-mode: difference; }
-    .cursor span { display: block; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff;
-      transition: width .25s cubic-bezier(.2,.8,.2,1), height .25s cubic-bezier(.2,.8,.2,1), margin .25s cubic-bezier(.2,.8,.2,1), background .25s, border-width .25s;
-      border: 0 solid #fff; }
-    .cursor.hover span { width: 44px; height: 44px; margin: -22px 0 0 -22px; background: transparent; border-width: 1.5px; }
-    .cursor.down span { width: 8px; height: 8px; margin: -4px 0 0 -4px; }
-    .cursor.hidden { opacity: 0; }
-  }
-
   /* letras do nome: mola ao passar o mouse */
   h1 .ch { display: inline-block; font-style: normal; transition: transform .5s cubic-bezier(.3,1.6,.5,1), color .3s; will-change: transform; }
   h1 .ch.pop { transform: translateY(-.08em) rotate(var(--rot, -3deg)); color: var(--red); transition-duration: .18s; }
@@ -43,33 +26,6 @@
 <script>
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(pointer: fine)').matches;
-
-  // ---------- cursor ----------
-  if (fine && !reduce) {
-    const root = document.documentElement;
-    const cur = document.querySelector('.cursor') as HTMLElement;
-    const dot = cur.firstElementChild as HTMLElement;
-    root.classList.add('has-cursor');
-    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, vx = 0, vy = 0, seen = false;
-    addEventListener('pointermove', (e) => { x = e.clientX; y = e.clientY; if (!seen) { cx = x; cy = y; seen = true; } cur.classList.remove('hidden'); }, { passive: true });
-    document.addEventListener('pointerleave', () => cur.classList.add('hidden'));
-    addEventListener('pointerdown', () => cur.classList.add('down'));
-    addEventListener('pointerup', () => cur.classList.remove('down'));
-    document.addEventListener('pointerover', (e) => {
-      const t = e.target as HTMLElement;
-      cur.classList.toggle('hover', !!t.closest('a, button, .tile, [data-magnetic]'));
-    });
-    const tick = () => {
-      const nx = cx + (x - cx) * 0.28, ny = cy + (y - cy) * 0.28;
-      vx = nx - cx; vy = ny - cy; cx = nx; cy = ny;
-      const speed = Math.min(Math.hypot(vx, vy), 40);
-      const s = 1 + speed / 45; // estica
-      const a = Math.atan2(vy, vx);
-      cur.style.transform = `translate3d(${cx}px, ${cy}px, 0) rotate(${a}rad) scale(${s}, ${1 / Math.sqrt(s)})`;
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
 
   if (!reduce) {
     // ---------- letras do nome ----------
