@@ -8,8 +8,13 @@ const t = content[lang];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const home = lang === 'en' ? `${base}/` : `${base}/pt/`;
 
-const companies = ['762interactive', 'Gazeus Games', 'YDreams', 'Okoto Studio', 'Pink Mango'];
-const platforms = ['iOS', 'Android', 'Mac', 'Steam', 'Xbox'];
+const companies = ['762 Interactive', 'Gazeus Games', 'Okoto Studio', 'Metaversando', 'YDreams', 'Pink Mango'];
+const platforms = ['iOS', 'Android', 'Netflix Games', 'Facebook Gaming', 'Steam', 'Meta Quest'];
+const links = [
+  { label: 'LinkedIn', detail: 'in/albertoa89', href: 'https://www.linkedin.com/in/albertoa89' },
+  { label: 'GitHub', detail: 'albertoneto', href: 'https://github.com/albertoneto' },
+  { label: 'Mangut', detail: 'Steam', href: 'https://store.steampowered.com/app/3195840/' },
+];
 const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
 ---
 <!doctype html>
@@ -37,7 +42,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       <a class="scene" href={home}><span class="dot"></span>Portfolio.unity</a>
       <nav>
         <a href="#work">{t.nav.work}</a>
-        <a href="#index">{t.nav.more}</a>
+        <a href="#experience">{t.nav.more}</a>
         <a href="#contact">{t.nav.contact}</a>
       </nav>
       <div class="bar-right">
@@ -55,6 +60,9 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
         </h1>
         <p class="lead reveal" style="--d:3">{t.hero.lead}</p>
         <p class="sub reveal" style="--d:4">{t.hero.sub}</p>
+        <dl class="stats reveal" style="--d:5">
+          {t.hero.stats.map((s) => (<div><dd>{s.value}</dd><dt>{s.label}</dt></div>))}
+        </dl>
       </div>
       <div class="hero-sim reveal" style="--d:2">
         <Rope hint={t.hero.hint} />
@@ -134,24 +142,31 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
         </article>
       ))}
 
-      <h2 class="section" id="index"><span>02</span>{t.moreTitle}</h2>
-      <ul class="hier">
-        {t.more.map((m) => (
-          <li>
-            <span class="arrow">▸</span>
-            <span class="h-title">{m.title}</span>
-            <span class="h-org">{m.org}</span>
-            {m.text && <span class="h-text">{m.text}</span>}
+      <h2 class="section" id="experience"><span>02</span>{t.moreTitle}</h2>
+      <ol class="timeline">
+        {t.jobs.map((j) => (
+          <li class={j.current ? 'job current' : 'job'}>
+            <p class="j-years">{j.years}</p>
+            <div class="j-head">
+              <h3>{j.role}</h3>
+              <p class="j-org">{j.org}</p>
+            </div>
+            <div class="j-body">
+              <p>{j.text}</p>
+              {j.tags && <ul class="tags">{j.tags.map((g) => <li>{g}</li>)}</ul>}
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
+      <p class="edu">{t.education}</p>
 
       <h2 class="section" id="contact"><span>03</span>{t.contact.title}</h2>
       <div class="contact">
-        <p class="contact-text">{t.contact.text}</p>
+        <p class="contact-meta"><span>{t.contact.location}</span><span>{t.contact.languages}</span></p>
         <ul class="links">
-          <li><a href="https://github.com/albertoneto" rel="noopener"><span>GitHub</span><em>github.com/albertoneto</em><b>↗</b></a></li>
-          <li><a href="https://store.steampowered.com/app/3195840/" rel="noopener"><span>Mangut</span><em>Steam</em><b>↗</b></a></li>
+          {links.map((l) => (
+            <li><a href={l.href} rel="noopener"><span>{l.label}</span><em>{l.detail}</em><b>↗</b></a></li>
+          ))}
         </ul>
       </div>
     </main>
@@ -170,7 +185,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       requestAnimationFrame(tick);
       // Revela os cases ao entrar na tela.
       const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
-      document.querySelectorAll('.case, .hier li, .contact').forEach((n) => io.observe(n));
+      document.querySelectorAll('.case, .job, .contact').forEach((n) => io.observe(n));
     </script>
 
     <style is:global>
@@ -242,7 +257,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       /* case */
       .case { display: grid; grid-template-columns: 1fr; gap: 28px; padding: 56px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 60px;
         opacity: 0; transform: translateY(24px); transition: opacity .8s, transform .8s cubic-bezier(.2,.8,.2,1); }
-      .case.in, .hier li.in, .contact.in { opacity: 1; transform: none; }
+      .case.in, .contact.in { opacity: 1; transform: none; }
       @media (min-width: 960px) { .case { grid-template-columns: 280px minmax(0, 1fr); gap: 48px; } .inspector { position: sticky; top: 64px; align-self: start; } }
 
       .inspector { background: #2a2825; color: #e8e2d6; border-radius: 6px; font: 400 12px/1.4 var(--mono); overflow: hidden; box-shadow: 0 1px 0 #0003, 0 18px 40px -24px #0008; }
@@ -317,20 +332,34 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .results strong { display: block; font-size: clamp(36px, 4.4vw, 56px); font-weight: 800; letter-spacing: -.04em; line-height: 1; }
       .results span { font: 400 12px/1.4 var(--mono); color: var(--muted); }
 
-      /* índice tipo Hierarchy */
-      .hier { list-style: none; margin: 32px 0 0; padding: 0; border-top: 1px solid var(--rule); }
-      .hier li { display: grid; grid-template-columns: 24px 1fr; column-gap: 8px; padding: 20px 0; border-bottom: 1px solid var(--rule);
-        opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s, background .2s; }
-      .hier li:hover { background: rgba(255,61,23,.05); }
-      .arrow { color: var(--red); font-size: 14px; padding-top: 6px; }
-      .h-title { font-size: clamp(24px, 3vw, 36px); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
-      .h-org { grid-column: 2; font: 500 12px/1.4 var(--mono); color: var(--muted); margin-top: 4px; }
-      .h-text { grid-column: 2; color: var(--ink-2); max-width: 60ch; margin-top: 8px; }
-      @media (min-width: 860px) { .hier li { grid-template-columns: 24px 1fr 200px 1.3fr; align-items: baseline; } .h-org, .h-text { grid-column: auto; margin: 0; } }
+      /* números do topo */
+      .stats { display: flex; flex-wrap: wrap; gap: 12px 40px; margin: 36px 0 0; }
+      .stats div { display: flex; flex-direction: column; }
+      .stats dd { margin: 0; font-size: clamp(40px, 4.6vw, 64px); font-weight: 800; letter-spacing: -.05em; line-height: .95; }
+      .stats div:nth-child(2) dd { color: var(--red); }
+      .stats dt { font: 500 11px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-top: 6px; }
 
-      /* contato: frase grande + links em linha, sem firula */
+      /* linha do tempo de experiência */
+      .timeline { list-style: none; margin: 32px 0 0; padding: 0; position: relative; }
+      .job { display: grid; grid-template-columns: 1fr; gap: 6px 32px; padding: 26px 0 26px 28px; border-bottom: 1px solid var(--rule); position: relative;
+        opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
+      .job::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: var(--rule); }
+      .job::after { content: ''; position: absolute; left: 0; top: 33px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+      .job.current::after { background: var(--red); border-color: var(--red); box-shadow: 0 0 0 5px rgba(255,61,23,.18); }
+      .job.in { opacity: 1; transform: none; }
+      .j-years { margin: 0; font: 500 12px/1.6 var(--mono); color: var(--muted); padding-top: 4px; }
+      .job.current .j-years { color: var(--red); }
+      .j-head h3 { margin: 0; font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; letter-spacing: -.025em; line-height: 1.15; }
+      .j-org { margin: 2px 0 0; font-weight: 500; color: var(--ink-2); }
+      .j-body p { margin: 0; color: var(--ink-2); }
+      .tags { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+      .tags li { font: 500 11px/1 var(--mono); padding: 5px 8px; border: 1px solid var(--rule); border-radius: 3px; color: var(--ink-2); }
+      @media (min-width: 900px) { .job { grid-template-columns: 150px minmax(0, .9fr) minmax(0, 1.4fr); } }
+      .edu { margin: 28px 0 0; font: 400 13px/1.5 var(--mono); color: var(--muted); }
+
+      /* contato: só onde, idiomas e links */
       .contact { margin-top: 32px; opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
-      .contact-text { font-size: clamp(28px, 4vw, 52px); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; max-width: 20ch; margin: 0 0 40px; }
+      .contact-meta { display: flex; flex-wrap: wrap; gap: 8px 32px; margin: 0 0 28px; font: 500 13px/1.4 var(--mono); color: var(--ink-2); }
       .links { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
       .links a { display: grid; grid-template-columns: 1fr auto auto; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--rule); text-decoration: none; transition: color .15s, padding .25s; }
       .links span { font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; letter-spacing: -.03em; }
@@ -348,7 +377,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        .reveal, .case, .hier li, .contact { animation: none; opacity: 1; transform: none; transition: none; }
+        .reveal, .case, .job, .contact { animation: none; opacity: 1; transform: none; transition: none; }
       }
     </style>
   </body>

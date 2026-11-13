@@ -1,12 +1,11 @@
-// Todo texto do site nas duas línguas. Nunca inventar papel, data ou número do Alberto:
-// o que não veio dele fica fora. Números de produto (loja) só de fonte pública.
+// Todo texto do site nas duas línguas. Fonte: LinkedIn do Alberto (nov/2026) e lojas/sites públicos.
+// Nunca inventar papel, data ou número. Projeto da 762 nunca aparece pelo nome.
 export type Lang = 'en' | 'pt';
 
 export type Case = {
   id: string;
   title: string;
   org: string;
-  years?: string;
   inspector: { k: string; v: string }[];
   pitch: string;
   sections: { h: string; p?: string; list?: string[] }[];
@@ -16,39 +15,43 @@ export type Case = {
   link?: { href: string; label: string };
 };
 
-type Short = { title: string; org: string; text: string };
+export type Job = { years: string; role: string; org: string; text: string; tags?: string[]; current?: boolean };
 
 const en = {
   meta: {
-    title: 'Alberto Assumpção · Tech Lead & Senior Unity Engineer',
+    title: 'Alberto Assumpção · Tech Lead, Unity & C#',
     description:
-      'Tech lead and senior Unity/C# engineer. Mobile multiplayer, custom physics, tooling, and the teams that ship them.',
+      'Tech lead with 10+ years in Unity and C#. 5 shipped titles and 20M+ players across mobile, PC, console and VR.',
   },
-  nav: { work: 'Work', more: 'Index', contact: 'Contact', switchLabel: 'PT', switchHref: '/pt/' },
+  nav: { work: 'Work', more: 'Experience', contact: 'Contact', switchLabel: 'PT', switchHref: '/pt/' },
   hero: {
-    role: 'Tech Lead · Senior Unity Engineer',
+    role: 'Tech Lead · Unity & C# · Game Architecture',
     first: 'Alberto',
     last: 'Assumpção',
-    lead: 'I build game systems in Unity and C#, and lead the teams that ship them.',
-    sub: 'Mobile multiplayer played by millions, a hand-made physics engine for my own game, and the architecture that keeps a team fast.',
+    lead: 'I build games, and the teams that build them.',
+    sub: 'Tech lead with 10+ years in Unity and C#. From a multiplayer dominoes game on Netflix Games to a hand-made physics engine for my own platformer.',
     hint: 'drag the hook',
+    stats: [
+      { value: '10+', label: 'years in Unity & C#' },
+      { value: '20M+', label: 'players reached' },
+      { value: '5', label: 'shipped titles' },
+    ],
     shippedAt: 'Worked at',
-    platforms: 'Platforms',
+    platforms: 'Shipped on',
   },
   workTitle: 'Selected work',
   cases: [
     {
       id: 'mangut',
       title: 'Mangut',
-      org: 'Pink Mango · my indie studio',
+      org: 'Pink Mango · my studio',
       inspector: [
         { k: 'Role', v: 'Founder · director · lead programmer' },
         { k: 'Engine', v: 'Unity 2D · C#' },
         { k: 'Middleware', v: 'FMOD · Rewired · Steamworks' },
         { k: 'Platforms', v: 'Steam · Xbox (2027)' },
       ],
-      pitch:
-        'A hand-painted precision platformer about an app delivery rider racing to pay the bills.',
+      pitch: 'A hand-painted precision platformer about an app delivery rider racing to pay the bills.',
       sections: [
         {
           h: 'Problem',
@@ -66,7 +69,7 @@ const en = {
       ],
       results: [
         { value: '41 min', label: 'average demo session' },
-        { value: '5', label: 'languages in the demo' },
+        { value: 'Top 10', label: 'Embratur “Brasil Tá Pra Game” award' },
         { value: 'ID@Xbox', label: 'publishing contracts signed' },
       ],
       media: 'mangut',
@@ -74,35 +77,37 @@ const en = {
     },
     {
       id: 'dominoes',
-      title: 'Dominoes Battle',
+      title: 'Dominoes',
       org: 'Gazeus Games',
       inspector: [
-        { k: 'Studio', v: 'Gazeus Games' },
-        { k: 'Platforms', v: 'iPhone · iPad · Mac · Vision Pro' },
-        { k: 'Players', v: '2 or 4 · online or vs bots' },
+        { k: 'Role', v: 'Unity C# developer' },
+        { k: 'Games', v: 'Dominoes Jogatina · Dominoes Battle' },
+        { k: 'Platforms', v: 'Android · iOS · Facebook Gaming · Netflix Games' },
         { k: 'Model', v: 'Free to play · live ops' },
       ],
-      pitch:
-        'Competitive online dominoes from one of Brazil’s biggest casual game studios, built to keep players coming back every day.',
+      pitch: 'Online multiplayer dominoes from one of Brazil’s biggest casual studios. I worked on it twice.',
       sections: [
         {
-          h: 'The game',
+          h: '2019 · Dominoes Jogatina',
+          p: 'Remade the studio’s original dominoes game in Unity: the one with 10M+ downloads on Google Play.',
+        },
+        {
+          h: '2021–22 · Dominoes Battle',
           list: [
-            'Four rule sets (Turbo, Draw, All Fives, Block) for 2 players or 2 teams of 2.',
-            'Online matches against players worldwide, with reconnection to resume an interrupted game.',
-            'Async friend challenges: replay the same Turbo deal as a friend and compare scores.',
-            'Live-ops layer: leagues, rankings, events, daily missions, chat, friends, cosmetics and a soft-currency economy.',
+            'Core gameplay features for a competitive game with 2 or 4 players, four rule sets, online matches and reconnection.',
+            'Live-ops updates: leagues, rankings, events, daily missions, chat and a soft-currency economy.',
+            'Platform integrations for Google Play, App Store, Facebook Gaming and Netflix Games, keeping it stable for millions of active players.',
           ],
         },
       ],
       results: [
+        { value: '4', label: 'storefronts, from Google Play to Netflix' },
         { value: '7', label: 'languages' },
-        { value: '4', label: 'Apple platforms' },
-        { value: '4', label: 'rule sets' },
+        { value: '2×', label: 'times on the franchise' },
       ],
       highlight: [
         { value: '10M+', label: 'downloads on Google Play · Dominoes Jogatina' },
-        { value: '380K+', label: 'Google Play ratings' },
+        { value: 'Netflix', label: 'Games · Dominoes Battle' },
         { value: '4.7★', label: 'App Store · Dominoes Battle' },
       ],
       media: 'dominoes',
@@ -111,27 +116,27 @@ const en = {
     {
       id: 'rabiola',
       title: 'Rabiola',
-      org: 'Leonardo Souza · Okoto Studio · Black Public Media',
+      org: 'Okoto Studio · Black Public Media',
       inspector: [
-        { k: 'Role', v: 'Developer · VR kite physics, projection client, server and infra' },
+        { k: 'Role', v: 'Unity C# developer · architect of the VR version' },
         { k: 'Engine', v: 'Unity · C#' },
         { k: 'Network', v: 'Node.js · WebSocket · Heroku' },
-        { k: 'Platforms', v: 'Meta Quest · Rift · projection + phones' },
+        { k: 'Platforms', v: 'Meta Quest · projection + phones' },
       ],
       pitch:
         'Two ways to fly a kite over Rio: in VR, from a favela rooftop, and on the street, in a sky projected on a building with your phone as the controller.',
       sections: [
         {
           h: 'Rabiola Tales · VR',
-          p: 'A kite-shop owner teaches you to fly over the rooftops of a Rio favela while telling stories about the neighborhood. Everyone in Rio grew up flying kites, so everyone knows the second one feels wrong.',
+          p: 'I developed and architected this VR kite simulator for Meta Quest. The hard part: reproduce the real feeling of flying a kite, smooth and responsive, for people who grew up doing it on rooftops.',
           list: [
             'The kite flight model: custom physics for wind, lift, drag and line tension, tuned until it behaves like a real rooftop kite.',
-            'Line control with tracked hands: pull and give slack to climb, dive and steer.',
+            'Line control with tracked hands, inside a playful 3D world with a kite-shop owner telling stories about the neighborhood.',
           ],
         },
         {
           h: 'Rabiola Céu Aberto · projection',
-          p: 'The street spin-off: anyone walking by opens a page, gets a kite and flies it with up to 25 strangers. A live show has no second take, so the system had to survive idle phones, lost signal and people leaving mid-match.',
+          p: 'The street spin-off: anyone walking by opens a page, gets a kite and flies it with up to 25 strangers. A live show has no second take.',
           list: [
             'Three pieces, one socket: Unity projection client, Node.js WebSocket relay and a web controller. Nothing to install.',
             'Each phone gets a letter that is its kite. Swipes go up as commands, catches come back as a personal score.',
@@ -143,56 +148,69 @@ const en = {
         { value: '26', label: 'players flying at once' },
         { value: '0', label: 'apps to install' },
         { value: 'US$25K', label: '2nd place, Pitch Black 2022' },
-        { value: '6DoF', label: 'VR on Quest and Rift' },
       ],
       media: 'rabiola',
       link: { href: 'https://rabiolaopen.com', label: 'Project site' },
     },
   ] as Case[],
-  moreTitle: 'Index',
-  more: [
-    {
-      title: 'Tech Lead',
-      org: '762interactive',
-      text: 'Technical architecture, design docs and tooling for the team, in Unity 6.',
-    },
-    {
-      title: 'Dominoes Jogatina',
-      org: 'Gazeus Games',
-      text: 'The original online dominoes for Android and iOS. 10M+ downloads on Google Play.',
-    },
-    { title: 'Project Genesis', org: 'YDreams', text: '' },
-  ] as Short[],
+  moreTitle: 'Experience',
+  jobs: [
+    { years: '2025 — now', role: 'Technical Lead', org: '762 Interactive', current: true,
+      text: 'Lead the technical direction of a strategy game in development: architecture, engineering standards, and the bridge between design, production and code. Still hands-on in Unity.', tags: ['Unity 6', 'Architecture', 'Team lead'] },
+    { years: '2022 — 2025', role: 'Founder, developer & director', org: 'Pink Mango',
+      text: 'Took Mangut from zero to Steam: every core system in Unity, plus roadmap, creative direction and fundraising.', tags: ['Steam', 'Xbox', 'Production'] },
+    { years: '2023', role: 'Unity C# developer', org: 'Metaversando',
+      text: 'Architected a multiplayer, cross-platform communication platform with voice chat, screen sharing and custom avatars, bridging Web and Meta Quest 2.', tags: ['Multiplayer', 'VR', 'Web'] },
+    { years: '2020 — 2023', role: 'Unity C# developer', org: 'Okoto Studio',
+      text: 'Rabiola Tales (VR kite simulator for Meta Quest) and 360° installations for exhibitions, including Céu Aberto and Às Margens do Rio Ipiranga.', tags: ['VR', 'Installations'] },
+    { years: '2019 · 2021 — 22', role: 'Unity C# developer', org: 'Gazeus Games',
+      text: 'Remade Dominoes Jogatina in Unity (10M+ downloads), then built gameplay, live ops and platform integrations for Dominoes Battle, up to Netflix Games.', tags: ['Mobile', 'Multiplayer', 'Live ops'] },
+    { years: '2019 — 2021', role: 'Game creator & developer', org: 'Pink Mango',
+      text: 'Created and shipped Rango, a casual mobile game on Google Play, with its own level editor for fast iteration.', tags: ['Mobile', 'Tools'] },
+    { years: '2019 — 2020', role: 'Unity developer', org: 'Rebuliço',
+      text: 'First versions of NaÀra, a 2D stealth platformer set in key moments of Brazilian history.' },
+    { years: '2016 — 2018', role: 'Unity developer', org: 'YDreams · Arcolabs · Smash Mountain',
+      text: 'Agency and studio work: Barretos Cancer Hospital’s Genesis Mission and the NBA Fan Zone at Rock in Rio, a mobile adventure-game framework, and the gameplay, retention and monetization of BeJJ.' },
+    { years: '2011 — 2013', role: 'Co-founder & technical lead', org: 'Clickae',
+      text: 'Co-founded a coupon startup and grew from coding the site to leading a team of up to five engineers, shipping three site versions and the back-office behind them.', tags: ['Team lead'] },
+  ] as Job[],
+  education: 'Computer Science at UFRJ · Digital Games at Estácio · VR bootcamp at Museu do Amanhã',
   contact: {
     title: 'Contact',
-    text: 'Games, systems and the teams that ship them. Always happy to talk shop.',
+    location: 'Rio de Janeiro, Brazil',
+    languages: 'Portuguese · English · Spanish',
   },
-  footer: 'Built with Astro. No frameworks were harmed.',
+  footer: 'Built with Astro.',
 };
 
 const pt: typeof en = {
   meta: {
-    title: 'Alberto Assumpção · Tech Lead e Senior Unity Engineer',
+    title: 'Alberto Assumpção · Tech Lead, Unity e C#',
     description:
-      'Tech lead e engenheiro Unity/C# sênior. Multiplayer mobile, física custom, ferramentas e os times que entregam.',
+      'Tech lead com mais de 10 anos de Unity e C#. 5 títulos lançados e mais de 20 milhões de jogadores em mobile, PC, console e VR.',
   },
-  nav: { work: 'Projetos', more: 'Índice', contact: 'Contato', switchLabel: 'EN', switchHref: '/' },
+  nav: { work: 'Projetos', more: 'Experiência', contact: 'Contato', switchLabel: 'EN', switchHref: '/' },
   hero: {
-    role: 'Tech Lead · Senior Unity Engineer',
+    role: 'Tech Lead · Unity e C# · Arquitetura de jogos',
     first: 'Alberto',
     last: 'Assumpção',
-    lead: 'Construo sistemas de jogo em Unity e C# e lidero os times que botam eles na rua.',
-    sub: 'Multiplayer mobile jogado por milhões, um motor de física feito à mão pro meu próprio jogo e a arquitetura que mantém um time rápido.',
+    lead: 'Eu faço jogos, e os times que fazem jogos.',
+    sub: 'Tech lead com mais de 10 anos de Unity e C#. De um dominó multiplayer na Netflix Games a um motor de física feito à mão pro meu próprio platformer.',
     hint: 'arraste o gancho',
+    stats: [
+      { value: '10+', label: 'anos de Unity e C#' },
+      { value: '20M+', label: 'jogadores alcançados' },
+      { value: '5', label: 'títulos lançados' },
+    ],
     shippedAt: 'Trabalhei em',
-    platforms: 'Plataformas',
+    platforms: 'Lancei em',
   },
   workTitle: 'Projetos',
   cases: [
     {
       id: 'mangut',
       title: 'Mangut',
-      org: 'Pink Mango · meu estúdio indie',
+      org: 'Pink Mango · meu estúdio',
       inspector: [
         { k: 'Papel', v: 'Fundador · diretor · programador líder' },
         { k: 'Engine', v: 'Unity 2D · C#' },
@@ -217,7 +235,7 @@ const pt: typeof en = {
       ],
       results: [
         { value: '41 min', label: 'sessão média na demo' },
-        { value: '5', label: 'idiomas na demo' },
+        { value: 'Top 10', label: 'prêmio “Brasil Tá Pra Game” da Embratur' },
         { value: 'ID@Xbox', label: 'contratos de publicação assinados' },
       ],
       media: 'mangut',
@@ -225,35 +243,37 @@ const pt: typeof en = {
     },
     {
       id: 'dominoes',
-      title: 'Dominoes Battle',
+      title: 'Dominoes',
       org: 'Gazeus Games',
       inspector: [
-        { k: 'Estúdio', v: 'Gazeus Games' },
-        { k: 'Plataformas', v: 'iPhone · iPad · Mac · Vision Pro' },
-        { k: 'Jogadores', v: '2 ou 4 · online ou contra bots' },
+        { k: 'Papel', v: 'Dev Unity C#' },
+        { k: 'Jogos', v: 'Dominoes Jogatina · Dominoes Battle' },
+        { k: 'Plataformas', v: 'Android · iOS · Facebook Gaming · Netflix Games' },
         { k: 'Modelo', v: 'Free to play · live ops' },
       ],
-      pitch:
-        'Dominó online competitivo de um dos maiores estúdios de jogos casuais do Brasil, feito pro jogador voltar todo dia.',
+      pitch: 'Dominó multiplayer online de um dos maiores estúdios casuais do Brasil. Trabalhei nele duas vezes.',
       sections: [
         {
-          h: 'O jogo',
+          h: '2019 · Dominoes Jogatina',
+          p: 'Refiz em Unity o dominó original do estúdio: o que tem mais de 10 milhões de downloads no Google Play.',
+        },
+        {
+          h: '2021–22 · Dominoes Battle',
           list: [
-            'Quatro regras (Turbo, Draw, All Fives, Block) pra 2 jogadores ou 2 duplas.',
-            'Partidas online contra o mundo todo, com reconexão pra retomar jogo interrompido.',
-            'Desafio assíncrono entre amigos: a mesma mão de Turbo jogada pelos dois, placar comparado.',
-            'Camada de live ops: ligas, ranking, eventos, missões diárias, chat, amigos, cosméticos e economia de moeda virtual.',
+            'Features centrais de gameplay num jogo competitivo de 2 ou 4 jogadores, quatro regras, partida online e reconexão.',
+            'Atualizações de live ops: ligas, ranking, eventos, missões diárias, chat e economia de moeda virtual.',
+            'Integrações com Google Play, App Store, Facebook Gaming e Netflix Games, mantendo estável pra milhões de jogadores ativos.',
           ],
         },
       ],
       results: [
+        { value: '4', label: 'lojas, do Google Play à Netflix' },
         { value: '7', label: 'idiomas' },
-        { value: '4', label: 'plataformas Apple' },
-        { value: '4', label: 'regras de jogo' },
+        { value: '2×', label: 'passagens pela franquia' },
       ],
       highlight: [
         { value: '10 mi+', label: 'downloads no Google Play · Dominoes Jogatina' },
-        { value: '380 mil+', label: 'avaliações no Google Play' },
+        { value: 'Netflix', label: 'Games · Dominoes Battle' },
         { value: '4,7★', label: 'App Store · Dominoes Battle' },
       ],
       media: 'dominoes',
@@ -262,27 +282,27 @@ const pt: typeof en = {
     {
       id: 'rabiola',
       title: 'Rabiola',
-      org: 'Leonardo Souza · Okoto Studio · Black Public Media',
+      org: 'Okoto Studio · Black Public Media',
       inspector: [
-        { k: 'Papel', v: 'Dev · física da pipa em VR, cliente da projeção, servidor e infra' },
+        { k: 'Papel', v: 'Dev Unity C# · arquiteto da versão VR' },
         { k: 'Engine', v: 'Unity · C#' },
         { k: 'Rede', v: 'Node.js · WebSocket · Heroku' },
-        { k: 'Plataformas', v: 'Meta Quest · Rift · projeção + celulares' },
+        { k: 'Plataformas', v: 'Meta Quest · projeção + celulares' },
       ],
       pitch:
         'Dois jeitos de empinar pipa no Rio: em VR, de cima de uma laje na favela, e na rua, num céu projetado num prédio com o celular de controle.',
       sections: [
         {
           h: 'Rabiola Tales · VR',
-          p: 'O dono de uma loja de pipa te ensina a empinar sobre as lajes de uma favela do Rio enquanto conta histórias do bairro. Todo mundo no Rio cresceu soltando pipa, então todo mundo sabe na hora quando uma está errada.',
+          p: 'Desenvolvi e arquitetei esse simulador de pipa em VR pro Meta Quest. O difícil: reproduzir a sensação real de empinar pipa, suave e responsiva, pra quem cresceu fazendo isso na laje.',
           list: [
             'O modelo de voo da pipa: física custom de vento, sustentação, arrasto e tensão da linha, ajustada até se comportar como pipa de laje de verdade.',
-            'Controle da linha com as mãos rastreadas: puxa e dá linha pra subir, dibicar e manobrar.',
+            'Controle da linha com as mãos rastreadas, num mundo 3D lúdico com o dono da loja de pipa contando histórias do bairro.',
           ],
         },
         {
           h: 'Rabiola Céu Aberto · projeção',
-          p: 'O spin-off pra rua: quem passa abre uma página, ganha uma pipa e empina com até 25 desconhecidos. Show ao vivo não tem segunda chance, então o sistema tinha que aguentar celular ocioso, sinal caindo e gente saindo no meio da partida.',
+          p: 'O spin-off pra rua: quem passa abre uma página, ganha uma pipa e empina com até 25 desconhecidos. Show ao vivo não tem segunda chance.',
           list: [
             'Três peças, um socket: cliente Unity da projeção, relay WebSocket em Node.js e controle web. Nada pra instalar.',
             'Cada celular ganha uma letra, que é a pipa dele. Swipe sobe como comando, pipa coletada volta como placar pessoal.',
@@ -294,31 +314,39 @@ const pt: typeof en = {
         { value: '26', label: 'jogadores ao mesmo tempo' },
         { value: '0', label: 'apps pra instalar' },
         { value: 'US$25 mil', label: '2º lugar, Pitch Black 2022' },
-        { value: '6DoF', label: 'VR no Quest e no Rift' },
       ],
       media: 'rabiola',
       link: { href: 'https://rabiolaopen.com', label: 'Site do projeto' },
     },
   ],
-  moreTitle: 'Índice',
-  more: [
-    {
-      title: 'Tech Lead',
-      org: '762interactive',
-      text: 'Arquitetura técnica, documentação de design e ferramentas pro time, em Unity 6.',
-    },
-    {
-      title: 'Dominoes Jogatina',
-      org: 'Gazeus Games',
-      text: 'O dominó online original pra Android e iOS. Mais de 10 milhões de downloads no Google Play.',
-    },
-    { title: 'Project Genesis', org: 'YDreams', text: '' },
+  moreTitle: 'Experiência',
+  jobs: [
+    { years: '2025 — hoje', role: 'Technical Lead', org: '762 Interactive', current: true,
+      text: 'Lidero a direção técnica de um jogo de estratégia em desenvolvimento: arquitetura, padrões de engenharia e a ponte entre design, produção e código. Sigo com a mão no Unity.', tags: ['Unity 6', 'Arquitetura', 'Liderança'] },
+    { years: '2022 — 2025', role: 'Fundador, dev e diretor', org: 'Pink Mango',
+      text: 'Levei o Mangut do zero à Steam: todos os sistemas centrais em Unity, mais roadmap, direção criativa e captação.', tags: ['Steam', 'Xbox', 'Produção'] },
+    { years: '2023', role: 'Dev Unity C#', org: 'Metaversando',
+      text: 'Arquitetei uma plataforma de comunicação multiplayer e multiplataforma com chat de voz, compartilhamento de tela e avatares, ligando Web e Meta Quest 2.', tags: ['Multiplayer', 'VR', 'Web'] },
+    { years: '2020 — 2023', role: 'Dev Unity C#', org: 'Okoto Studio',
+      text: 'Rabiola Tales (simulador de pipa em VR pro Meta Quest) e experiências 360° pra exposições, entre elas Céu Aberto e Às Margens do Rio Ipiranga.', tags: ['VR', 'Instalações'] },
+    { years: '2019 · 2021 — 22', role: 'Dev Unity C#', org: 'Gazeus Games',
+      text: 'Refiz o Dominoes Jogatina em Unity (10 mi+ de downloads), depois gameplay, live ops e integrações de plataforma do Dominoes Battle, até a Netflix Games.', tags: ['Mobile', 'Multiplayer', 'Live ops'] },
+    { years: '2019 — 2021', role: 'Criador e dev', org: 'Pink Mango',
+      text: 'Criei e lancei o Rango, jogo casual mobile no Google Play, com editor de fases próprio pra iterar rápido.', tags: ['Mobile', 'Ferramentas'] },
+    { years: '2019 — 2020', role: 'Dev Unity', org: 'Rebuliço',
+      text: 'Primeiras versões do NaÀra, platformer 2D de stealth em momentos marcantes da história do Brasil.' },
+    { years: '2016 — 2018', role: 'Dev Unity', org: 'YDreams · Arcolabs · Smash Mountain',
+      text: 'Agência e estúdio: Missão Gênesis do Hospital de Amor de Barretos e a NBA Fan Zone no Rock in Rio, um framework de jogos de aventura mobile, e gameplay, retenção e monetização do BeJJ.' },
+    { years: '2011 — 2013', role: 'Co-fundador e tech lead', org: 'Clickae',
+      text: 'Co-fundei uma startup de cupons e passei de programar o site a liderar um time de até cinco devs, entregando três versões do site e o back-office por trás.', tags: ['Liderança'] },
   ],
+  education: 'Ciência da Computação na UFRJ · Jogos Digitais na Estácio · Bootcamp de VR no Museu do Amanhã',
   contact: {
     title: 'Contato',
-    text: 'Jogos, sistemas e os times que botam eles na rua. Bora trocar ideia.',
+    location: 'Rio de Janeiro, Brasil',
+    languages: 'Português · Inglês · Espanhol',
   },
-  footer: 'Feito com Astro. Nenhum framework foi ferido.',
+  footer: 'Feito com Astro.',
 };
 
 export const content = { en, pt };
