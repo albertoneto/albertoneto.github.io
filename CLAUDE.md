@@ -14,7 +14,7 @@ Site pessoal. Prazo do pacote: 20/12/2026.
 - **Hospedagem:** GitHub Pages da conta pessoal **albertoneto** (`https://albertoneto.github.io`). Nunca usar a conta `alberto762`. Sem domínio próprio.
 - **Stack:** Astro 7, estático, deploy por `.github/workflows/deploy.yml` (withastro/action, Node 22). Node local precisa ser >= 22.23.4; com Node antigo, `npx -y node@22 node_modules/astro/bin/astro.mjs <cmd>`.
 - **Idiomas:** EN em `/`, PT em `/pt/`. Todo texto vive em `src/i18n/content.ts`, nas duas línguas.
-- **Visual:** "debug view de engine": papel quadriculado claro, tinta preta, vermelho de sinal, verde de gizmo. Bricolage Grotesque + IBM Plex Mono. Hero com corda verlet desenhada como gizmo de física. Cada case tem painel tipo Inspector; índice tipo Hierarchy; contato como console.
+- **Visual:** "debug view de engine": papel quadriculado claro, tinta preta, vermelho de sinal, verde de gizmo. Bricolage Grotesque + IBM Plex Mono. Hero com corda verlet desenhada como gizmo de física. Cada case tem painel tipo Inspector; índice tipo Hierarchy; contato com frase grande e links em linha.
 - **Mangut:** estúdio paralelo (Pink Mango, lança 2027 em Steam e Xbox).
 - **Cases profundos:**
   1. Mangut: física custom, solver do gancho testado, speedrun/Steam, Build & Ship.

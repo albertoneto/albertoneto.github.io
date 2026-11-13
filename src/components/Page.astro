@@ -147,12 +147,12 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       </ul>
 
       <h2 class="section" id="contact"><span>03</span>{t.contact.title}</h2>
-      <div class="console">
-        <p class="c-line"><span class="c-prompt">&gt;</span> Debug.Log(<span class="c-str">"{t.contact.text}"</span>);</p>
-        <div class="links">
-          <a href="https://github.com/albertoneto" rel="noopener">github.com/albertoneto ↗</a>
-          <a href="https://store.steampowered.com/app/3195840/" rel="noopener">Mangut · Steam ↗</a>
-        </div>
+      <div class="contact">
+        <p class="contact-text">{t.contact.text}</p>
+        <ul class="links">
+          <li><a href="https://github.com/albertoneto" rel="noopener"><span>GitHub</span><em>github.com/albertoneto</em><b>↗</b></a></li>
+          <li><a href="https://store.steampowered.com/app/3195840/" rel="noopener"><span>Mangut</span><em>Steam</em><b>↗</b></a></li>
+        </ul>
       </div>
     </main>
 
@@ -170,7 +170,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       requestAnimationFrame(tick);
       // Revela os cases ao entrar na tela.
       const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
-      document.querySelectorAll('.case, .hier li, .console').forEach((n) => io.observe(n));
+      document.querySelectorAll('.case, .hier li, .contact').forEach((n) => io.observe(n));
     </script>
 
     <style is:global>
@@ -242,7 +242,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       /* case */
       .case { display: grid; grid-template-columns: 1fr; gap: 28px; padding: 56px 0; border-bottom: 1px solid var(--rule); scroll-margin-top: 60px;
         opacity: 0; transform: translateY(24px); transition: opacity .8s, transform .8s cubic-bezier(.2,.8,.2,1); }
-      .case.in, .hier li.in, .console.in { opacity: 1; transform: none; }
+      .case.in, .hier li.in, .contact.in { opacity: 1; transform: none; }
       @media (min-width: 960px) { .case { grid-template-columns: 280px minmax(0, 1fr); gap: 48px; } .inspector { position: sticky; top: 64px; align-self: start; } }
 
       .inspector { background: #2a2825; color: #e8e2d6; border-radius: 6px; font: 400 12px/1.4 var(--mono); overflow: hidden; box-shadow: 0 1px 0 #0003, 0 18px 40px -24px #0008; }
@@ -328,14 +328,15 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .h-text { grid-column: 2; color: var(--ink-2); max-width: 60ch; margin-top: 8px; }
       @media (min-width: 860px) { .hier li { grid-template-columns: 24px 1fr 200px 1.3fr; align-items: baseline; } .h-org, .h-text { grid-column: auto; margin: 0; } }
 
-      /* contato como console */
-      .console { margin-top: 32px; background: var(--ink); color: #e8e2d6; border-radius: 6px; padding: clamp(24px, 4vw, 48px); font-family: var(--mono);
-        opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
-      .c-line { margin: 0 0 32px; font-size: clamp(16px, 2vw, 22px); line-height: 1.5; }
-      .c-prompt { color: var(--gizmo); } .c-str { color: #ffb08f; }
-      .links { display: flex; flex-wrap: wrap; gap: 10px; }
-      .links a { text-decoration: none; font-size: 13px; padding: 12px 16px; border: 1px solid #3a3733; border-radius: 4px; transition: border-color .15s, color .15s; }
-      .links a:hover { border-color: var(--red); color: var(--red); }
+      /* contato: frase grande + links em linha, sem firula */
+      .contact { margin-top: 32px; opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
+      .contact-text { font-size: clamp(28px, 4vw, 52px); font-weight: 700; letter-spacing: -.035em; line-height: 1.05; max-width: 20ch; margin: 0 0 40px; }
+      .links { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+      .links a { display: grid; grid-template-columns: 1fr auto auto; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--rule); text-decoration: none; transition: color .15s, padding .25s; }
+      .links span { font-size: clamp(22px, 2.6vw, 32px); font-weight: 700; letter-spacing: -.03em; }
+      .links em { font: 400 13px/1 var(--mono); font-style: normal; color: var(--muted); }
+      .links b { color: var(--red); font-weight: 600; }
+      .links a:hover { color: var(--red); padding-left: 12px; }
 
       footer { max-width: var(--max); margin: 96px auto 0; padding: 20px var(--gutter) 40px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
         font: 400 11px/1.4 var(--mono); color: var(--muted); border-top: 1px solid var(--rule); }
@@ -347,7 +348,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        .reveal, .case, .hier li, .console { animation: none; opacity: 1; transform: none; transition: none; }
+        .reveal, .case, .hier li, .contact { animation: none; opacity: 1; transform: none; transition: none; }
       }
     </style>
   </body>

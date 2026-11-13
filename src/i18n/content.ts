@@ -165,7 +165,7 @@ const en = {
   ] as Short[],
   contact: {
     title: 'Contact',
-    text: 'Building something in Unity? I’m always up for a good conversation about games and code.',
+    text: 'Games, systems and the teams that ship them. Always happy to talk shop.',
   },
   footer: 'Built with Astro. No frameworks were harmed.',
 };
@@ -316,7 +316,7 @@ const pt: typeof en = {
   ],
   contact: {
     title: 'Contato',
-    text: 'Tá fazendo algo em Unity? Sempre topo uma boa conversa sobre jogos e código.',
+    text: 'Jogos, sistemas e os times que botam eles na rua. Bora trocar ideia.',
   },
   footer: 'Feito com Astro. Nenhum framework foi ferido.',
 };
