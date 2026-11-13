@@ -1,0 +1,147 @@
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<style is:global>
+  /* Cursor com squash & stretch: estica na direção do movimento, vira anel sobre o que é clicável.
+     Só em mouse; em toque e com movimento reduzido nada disso existe. */
+  .cursor { display: none; }
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html.has-cursor, html.has-cursor a, html.has-cursor button { cursor: none; }
+    html.has-cursor #rope { cursor: none; }
+    .cursor { display: block; position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; mix-blend-mode: difference; }
+    .cursor span { display: block; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff;
+      transition: width .25s cubic-bezier(.2,.8,.2,1), height .25s cubic-bezier(.2,.8,.2,1), margin .25s cubic-bezier(.2,.8,.2,1), background .25s, border-width .25s;
+      border: 0 solid #fff; }
+    .cursor.hover span { width: 44px; height: 44px; margin: -22px 0 0 -22px; background: transparent; border-width: 1.5px; }
+    .cursor.down span { width: 8px; height: 8px; margin: -4px 0 0 -4px; }
+    .cursor.hidden { opacity: 0; }
+  }
+
+  /* letras do nome: mola ao passar o mouse */
+  h1 .ch { display: inline-block; font-style: normal; transition: transform .5s cubic-bezier(.3,1.6,.5,1), color .3s; will-change: transform; }
+  h1 .ch.pop { transform: translateY(-.08em) rotate(var(--rot, -3deg)); color: var(--red); transition-duration: .18s; }
+
+  /* dominó: em cascata quando entra na tela, e tomba em sequência ao clicar */
+  .hand .tile { cursor: pointer; }
+  .table.dealt .tile { animation: deal .7s cubic-bezier(.2,.9,.3,1.2) backwards; animation-delay: calc(var(--k) * 80ms); }
+  @keyframes deal { from { opacity: 0; transform: translateY(-60px) rotate(-25deg); } }
+  .table.topple .tile { animation: topple 1.1s cubic-bezier(.5,0,.3,1); animation-delay: calc(var(--k) * 90ms); transform-origin: 100% 100%; }
+  @keyframes topple { 30% { transform: rotate(18deg) translateY(4px); } 55% { transform: rotate(-4deg); } 100% { transform: translateY(calc(var(--k) * -2px)) rotate(calc((var(--k) - 2.5) * 1.5deg)); } }
+
+  /* mídia dos cases inclina de leve com o mouse */
+  .media { transition: transform .5s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+
+  /* links magnéticos */
+  [data-magnetic] { display: inline-block; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .insp-link[data-magnetic] { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .table.dealt .tile, .table.topple .tile { animation: none; }
+    h1 .ch { transition: none; }
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+
+  // ---------- cursor ----------
+  if (fine && !reduce) {
+    const root = document.documentElement;
+    const cur = document.querySelector('.cursor') as HTMLElement;
+    const dot = cur.firstElementChild as HTMLElement;
+    root.classList.add('has-cursor');
+    let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y, vx = 0, vy = 0, seen = false;
+    addEventListener('pointermove', (e) => { x = e.clientX; y = e.clientY; if (!seen) { cx = x; cy = y; seen = true; } cur.classList.remove('hidden'); }, { passive: true });
+    document.addEventListener('pointerleave', () => cur.classList.add('hidden'));
+    addEventListener('pointerdown', () => cur.classList.add('down'));
+    addEventListener('pointerup', () => cur.classList.remove('down'));
+    document.addEventListener('pointerover', (e) => {
+      const t = e.target as HTMLElement;
+      cur.classList.toggle('hover', !!t.closest('a, button, .tile, [data-magnetic]'));
+    });
+    const tick = () => {
+      const nx = cx + (x - cx) * 0.28, ny = cy + (y - cy) * 0.28;
+      vx = nx - cx; vy = ny - cy; cx = nx; cy = ny;
+      const speed = Math.min(Math.hypot(vx, vy), 40);
+      const s = 1 + speed / 45; // estica
+      const a = Math.atan2(vy, vx);
+      cur.style.transform = `translate3d(${cx}px, ${cy}px, 0) rotate(${a}rad) scale(${s}, ${1 / Math.sqrt(s)})`;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  if (!reduce) {
+    // ---------- letras do nome ----------
+    document.querySelectorAll<HTMLElement>('h1 .ch').forEach((ch, i) => {
+      ch.style.setProperty('--rot', `${(i % 2 ? 1 : -1) * (2 + (i % 3))}deg`);
+      ch.addEventListener('pointerenter', () => {
+        ch.classList.add('pop');
+        setTimeout(() => ch.classList.remove('pop'), 220);
+      });
+    });
+
+    // ---------- links magnéticos ----------
+    if (fine) document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.35}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+
+    // ---------- tilt da mídia ----------
+    if (fine) document.querySelectorAll<HTMLElement>('.media').forEach((m) => {
+      m.addEventListener('pointermove', (e) => {
+        const r = m.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+        m.style.transform = `perspective(1200px) rotateX(${-py * 2.4}deg) rotateY(${px * 3.2}deg)`;
+      });
+      m.addEventListener('pointerleave', () => { m.style.transform = ''; });
+    });
+
+    // ---------- dominó ----------
+    const table = document.querySelector<HTMLElement>('.table');
+    if (table) {
+      new IntersectionObserver(([e], o) => { if (e.isIntersecting) { table.classList.add('dealt'); o.disconnect(); } }, { threshold: 0.4 }).observe(table);
+      table.querySelector('.hand')?.addEventListener('click', () => {
+        table.classList.remove('dealt', 'topple');
+        void table.offsetWidth; // reinicia a animação
+        table.classList.add('topple');
+      });
+    }
+
+    // ---------- números contando ----------
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+    document.querySelectorAll<HTMLElement>('.stats dd').forEach((dd, i) => {
+      const m = dd.textContent!.match(/^(\d+)(.*)$/);
+      if (!m) return;
+      const target = +m[1], suffix = m[2];
+      dd.textContent = '0' + suffix;
+      const start = performance.now() + 500 + i * 120, dur = 1300;
+      const run = (now: number) => {
+        const t = Math.min(Math.max((now - start) / dur, 0), 1);
+        dd.textContent = Math.round(easeOut(t) * target) + suffix;
+        if (t < 1) requestAnimationFrame(run);
+      };
+      requestAnimationFrame(run);
+    });
+  }
+
+  // ---------- linha do tempo preenche com o scroll ----------
+  const tl = document.querySelector<HTMLElement>('.timeline');
+  if (tl) {
+    const jobs = [...tl.querySelectorAll<HTMLElement>('.job')];
+    const update = () => {
+      const r = tl.getBoundingClientRect();
+      const mark = innerHeight * 0.6;
+      const p = Math.min(Math.max((mark - r.top) / r.height, 0), 1);
+      tl.style.setProperty('--p', p.toFixed(4));
+      jobs.forEach((j) => j.classList.toggle('passed', j.getBoundingClientRect().top + 38 < mark));
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+</script>

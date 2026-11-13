@@ -1,6 +1,7 @@
 ---
 import { content, type Lang } from '../i18n/content';
 import Rope from './Rope.astro';
+import Interactions from './Interactions.astro';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -48,16 +49,16 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       </nav>
       <div class="bar-right">
         <span class="fps" aria-hidden="true"><b id="fps">60</b> fps</span>
-        <a class="lang" href={`${base}${t.nav.switchHref}`} hreflang={lang === 'en' ? 'pt-BR' : 'en'}>{t.nav.switchLabel}</a>
+        <a class="lang" data-magnetic href={`${base}${t.nav.switchHref}`} hreflang={lang === 'en' ? 'pt-BR' : 'en'}>{t.nav.switchLabel}</a>
       </div>
     </header>
 
     <section class="hero">
       <div class="hero-copy">
         <p class="role reveal" style="--d:0">{t.hero.role}</p>
-        <h1>
-          <span class="reveal" style="--d:1">{t.hero.first}</span>
-          <span class="reveal last" style="--d:2">{t.hero.last}</span>
+        <h1 aria-label={`${t.hero.first} ${t.hero.last}`}>
+          <span class="reveal" style="--d:1" aria-hidden="true">{[...t.hero.first].map((ch) => <i class="ch">{ch}</i>)}</span>
+          <span class="reveal last" style="--d:2" aria-hidden="true">{[...t.hero.last].map((ch) => <i class="ch">{ch}</i>)}</span>
         </h1>
         <p class="lead reveal" style="--d:3">{t.hero.lead}</p>
         <p class="sub reveal" style="--d:4">{t.hero.sub}</p>
@@ -85,7 +86,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
             <dl>
               {c.inspector.map((f) => (<div><dt>{f.k}</dt><dd>{f.v}</dd></div>))}
             </dl>
-            {c.link && <a class="insp-link" href={c.link.href} rel="noopener">{c.link.label} ↗</a>}
+            {c.link && <a class="insp-link" data-magnetic href={c.link.href} rel="noopener">{c.link.label} ↗</a>}
           </aside>
 
           <div class="case-main">
@@ -172,6 +173,8 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       </div>
     </main>
 
+    <Interactions />
+
     <footer><span>© 2026 Alberto Assumpção</span><span>{t.footer}</span></footer>
 
     <script>
@@ -230,7 +233,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .hero { max-width: var(--max); margin: 0 auto; padding: clamp(40px, 7vw, 88px) var(--gutter) 0; display: grid; grid-template-columns: 1fr; gap: 24px; }
       .role { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin: 0 0 18px; }
       h1 { margin: 0; font-weight: 800; font-size: clamp(64px, 13vw, 184px); line-height: .84; letter-spacing: -.045em; font-variation-settings: 'opsz' 96; }
-      h1 span { display: block; }
+      h1 > span { display: block; }
       h1 .last { font-weight: 300; font-style: normal; letter-spacing: -.05em; padding-left: .55em; }
       .lead { font-size: clamp(22px, 2.4vw, 30px); line-height: 1.2; font-weight: 600; letter-spacing: -.01em; max-width: 24ch; margin: 36px 0 12px; }
       .sub { color: var(--ink-2); max-width: 46ch; margin: 0; }
@@ -310,7 +313,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .tile { display: grid; grid-template-columns: 1fr 1fr; width: clamp(84px, 11vw, 120px); aspect-ratio: 2 / 1; background: #f7f3ea; border-radius: 8px; padding: 6px; gap: 0;
         box-shadow: 0 2px 0 #cfc7b6, 0 14px 22px -8px #000a; margin: 0 -2px; transform: translateY(calc(var(--k) * -2px)) rotate(calc((var(--k) - 2.5) * 1.5deg));
         transition: transform .3s cubic-bezier(.2,.8,.2,1); }
-      .tile:hover { transform: translateY(-10px) rotate(0); }
+      .table:not(.topple) .tile:hover { transform: translateY(-10px) rotate(0); }
       .tile b { position: relative; }
       .tile b + b { border-left: 2px solid #d6cebd; }
       .tile b::before { content: ''; position: absolute; inset: 14%; --p: radial-gradient(circle, var(--ink) 42%, transparent 46%); }
@@ -344,8 +347,11 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .timeline { list-style: none; margin: 32px 0 0; padding: 0; position: relative; }
       .job { display: grid; grid-template-columns: 1fr; gap: 6px 32px; padding: 26px 0 26px 28px; border-bottom: 1px solid var(--rule); position: relative;
         opacity: 0; transform: translateY(12px); transition: opacity .6s, transform .6s; }
-      .job::before { content: ''; position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: var(--rule); }
-      .job::after { content: ''; position: absolute; left: 0; top: 33px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+      .timeline::before, .timeline::after { content: ''; position: absolute; left: 4px; top: 0; width: 2px; }
+      .timeline::before { bottom: 0; background: var(--rule); }
+      .timeline::after { height: calc(var(--p, 0) * 100%); background: var(--red); transition: height .15s linear; }
+      .job::after { content: ''; position: absolute; left: 0; top: 33px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); z-index: 1; transition: background .3s, border-color .3s; }
+      .job.passed::after { border-color: var(--red); }
       .job.current::after { background: var(--red); border-color: var(--red); box-shadow: 0 0 0 5px rgba(255,61,23,.18); }
       .job.in { opacity: 1; transform: none; }
       .j-years { margin: 0; font: 500 12px/1.6 var(--mono); color: var(--muted); padding-top: 4px; }
