@@ -27,4 +27,4 @@ Site pessoal. Prazo do pacote: 20/12/2026.
 
 ## Pendente do Alberto
 
-Link do itch, e-mail de contato (se quiser e-mail público), detalhes concretos da física do Rabiola Tales e vídeo/GIF dele.
+Link do itch, detalhes concretos da física do Rabiola Tales e vídeo/GIF dele.
