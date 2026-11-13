@@ -16,6 +16,7 @@ const links = [
   { label: 'LinkedIn', detail: 'in/albertoa89', href: 'https://www.linkedin.com/in/albertoa89' },
   { label: 'GitHub', detail: 'albertoneto', href: 'https://github.com/albertoneto' },
   { label: 'Mangut', detail: 'Steam', href: 'https://store.steampowered.com/app/3195840/' },
+  { label: t.nav.cv, detail: 'PDF', href: `${base}${t.nav.cvFile}`, download: true },
 ];
 const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
 ---
@@ -167,7 +168,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
         <p class="contact-meta"><span>{t.contact.location}</span><span>{t.contact.languages}</span></p>
         <ul class="links">
           {links.map((l) => (
-            <li><a href={l.href} rel="noopener"><span>{l.label}</span><em>{l.detail}</em><b>↗</b></a></li>
+            <li><a href={l.href} rel="noopener" download={l.download}><span>{l.label}</span><em>{l.detail}</em><b>{l.download ? '↓' : '↗'}</b></a></li>
           ))}
         </ul>
       </div>
