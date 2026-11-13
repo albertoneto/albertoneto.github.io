@@ -46,6 +46,7 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
         <a href="#work">{t.nav.work}</a>
         <a href="#experience">{t.nav.more}</a>
         <a href="#contact">{t.nav.contact}</a>
+        <a href={`${base}${t.nav.cvFile}`} download>{t.nav.cv} ↓</a>
       </nav>
       <div class="bar-right">
         <a class="lang" data-magnetic href={`${base}${t.nav.switchHref}`} hreflang={lang === 'en' ? 'pt-BR' : 'en'}>{t.nav.switchLabel}</a>

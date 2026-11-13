@@ -23,7 +23,7 @@ const en = {
     description:
       'Tech lead with 10+ years in Unity and C#. 5 shipped titles and 20M+ players across mobile, PC, console and VR.',
   },
-  nav: { work: 'Work', more: 'Experience', contact: 'Contact', switchLabel: 'PT', switchHref: '/pt/' },
+  nav: { work: 'Work', more: 'Experience', contact: 'Contact', cv: 'CV', cvFile: '/cv/Alberto-Assumpcao-CV-en.pdf', switchLabel: 'PT', switchHref: '/pt/' },
   hero: {
     role: 'Tech Lead · Unity & C# · Game Architecture',
     first: 'Alberto',
@@ -189,7 +189,7 @@ const pt: typeof en = {
     description:
       'Tech lead com mais de 10 anos de Unity e C#. 5 títulos lançados e mais de 20 milhões de jogadores em mobile, PC, console e VR.',
   },
-  nav: { work: 'Projetos', more: 'Experiência', contact: 'Contato', switchLabel: 'EN', switchHref: '/' },
+  nav: { work: 'Projetos', more: 'Experiência', contact: 'Contato', cv: 'Currículo', cvFile: '/cv/Alberto-Assumpcao-CV-pt.pdf', switchLabel: 'EN', switchHref: '/' },
   hero: {
     role: 'Tech Lead · Unity e C# · Arquitetura de jogos',
     first: 'Alberto',
