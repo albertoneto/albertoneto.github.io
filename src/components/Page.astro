@@ -41,14 +41,13 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
     <div class="grain" aria-hidden="true"></div>
 
     <header class="bar">
-      <a class="scene" href={home}><span class="dot"></span>Portfolio.unity</a>
+      <a class="scene" href={home}><span class="dot"></span>Alberto Assumpção</a>
       <nav>
         <a href="#work">{t.nav.work}</a>
         <a href="#experience">{t.nav.more}</a>
         <a href="#contact">{t.nav.contact}</a>
       </nav>
       <div class="bar-right">
-        <span class="fps" aria-hidden="true"><b id="fps">60</b> fps</span>
         <a class="lang" data-magnetic href={`${base}${t.nav.switchHref}`} hreflang={lang === 'en' ? 'pt-BR' : 'en'}>{t.nav.switchLabel}</a>
       </div>
     </header>
@@ -178,15 +177,6 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
     <footer><span>© 2026 Alberto Assumpção</span><span>{t.footer}</span></footer>
 
     <script>
-      // FPS real da página, porque engenheiro de jogo olha isso primeiro.
-      const el = document.getElementById('fps');
-      let frames = 0, last = performance.now();
-      function tick(now: number) {
-        frames++;
-        if (now - last >= 500) { if (el) el.textContent = String(Math.round((frames * 1000) / (now - last))); frames = 0; last = now; }
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
       // Revela os cases ao entrar na tela.
       const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
       document.querySelectorAll('.case, .job, .contact').forEach((n) => io.observe(n));
@@ -226,7 +216,6 @@ const hand = [[6, 6], [6, 3], [3, 1], [1, 5], [5, 5], [5, 2]];
       .bar nav a { text-decoration: none; padding: 7px 12px; border-radius: 4px; color: #bdb6aa; transition: background .15s, color .15s; }
       .bar nav a:hover { background: #2a2825; color: var(--paper); }
       .bar-right { display: flex; justify-content: flex-end; align-items: center; gap: 14px; }
-      .fps { color: #8f887c; } .fps b { color: var(--gizmo); font-weight: 600; display: inline-block; min-width: 2ch; text-align: right; }
       .lang { text-decoration: none; background: var(--red); color: var(--paper); padding: 7px 10px; border-radius: 4px; font-weight: 600; }
 
       /* hero */
