@@ -18,9 +18,10 @@ Site pessoal. Prazo do pacote: 20/12/2026.
 - **Mangut:** estúdio paralelo (Pink Mango, lança 2027 em Steam e Xbox).
 - **Cases profundos:**
   1. Mangut: física custom, solver do gancho testado, speedrun/Steam, Build & Ship.
-  2. Dominoes Battle (Gazeus): números de loja em destaque na mesa (10M+ downloads do Jogatina no Google Play, 380K+ avaliações, 4.7★ App Store).
+  2. Dominoes Battle (Gazeus): números de loja em destaque na mesa (20M+ downloads do Jogatina em Android e iOS, número do Alberto; 10M+ só no Google Play, conferido; 4.7★ App Store).
   3. Rabiola (um case só, duas partes, criação de Leonardo Souza): **Tales** (VR 6DoF, Quest/Rift, BPM + Vild Studio; Alberto fez a física da pipa e a interação) e **Céu Aberto / Open Skies** (Okoto Studio, spin-off do Tales; Alberto fez o cliente Unity da projeção, o relay WebSocket e a infra; 2º lugar Pitch Black 2022, US$ 25 mil). Fotos reais de rabiolaopen.com e render do Tales do pitch na BPM (© 2020 Leonardo Souza), creditados na legenda.
-- **Experiência:** linha do tempo com dados do LinkedIn (in/albertoa89): 762 (Tech Lead, sem nome do projeto), Pink Mango, Metaversando, Okoto, Gazeus (Jogatina 2019 refeito em Unity + Dominoes Battle 2021-22 até Netflix Games), Rango, Rebuliço, YDreams/Arcolabs/Smash Mountain, Clickae (co-fundador e tech lead). Topo: 10+ anos, 20M+ jogadores, 5 títulos (números do próprio LinkedIn).
+- **CV:** `cv/` (fora do git, tem telefone): `cv-en.html` e `cv-pt.html`, 1 página, gerados em PDF pelo Edge headless. Fonte: CV antigo do Alberto (nov/2026), sem o nome do projeto da 762.
+- **Experiência:** linha do tempo com dados do LinkedIn (in/albertoa89) e do CV antigo (Clickaê foi comprada pela Fnbox, ele ficou de PM até 2015): 762 (Tech Lead, sem nome do projeto), Pink Mango, Metaversando, Okoto, Gazeus (Jogatina 2019 refeito em Unity + Dominoes Battle 2021-22 até Netflix Games), Rango, Rebuliço, YDreams/Arcolabs/Smash Mountain, Clickae (co-fundador e tech lead). Topo: 10+ anos, 20M+ jogadores, 5 títulos (números do próprio LinkedIn).
 - **Números:** só de fonte pública conferida ou dados pelo Alberto. Nada de agregador de terceiros.
 - **Fora:** projetos políticos (Tanto Faz, Cavaro Negro, Amor por SP, MF26) e qualquer repo de código público.
 - **Também no pacote:** CV em PDF (EN e PT, uma página, ATS-friendly) e texto do LinkedIn.
